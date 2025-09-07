@@ -117,7 +117,7 @@ const pages = defineCollection({
 
 const posts = defineCollection({
   name: "Post",
-  pattern: "posts/**/*.md",
+  pattern: "blog/**/*.mdx",
   schema: s
     .object({
       title: s.string().max(99),
