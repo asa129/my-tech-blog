@@ -9,22 +9,25 @@ export default function Home() {
     <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
         <Button>Button</Button>
+        <h1>Blog🫠</h1>
+        <p>日々の出来事をつらつらと書く</p>
+        <hr />
         {posts != null &&
           posts.map((post) => {
             return (
-              <div id={post.slug} className="border-2 rounded p-4">
+              <article key={post.slug} className="border-2 rounded p-4">
                 <h1>{post.title}</h1>
-                <Link href={`/blog/${post.slug}`}>
+                <Link href={`/blog/${post.slug}`} target="_blank">
                   <Image
                     src={post.cover?.src || ""}
                     alt={post.title}
-                    width={100}
-                    height={100}
+                    width={800}
+                    height={600}
                   />
                 </Link>
                 <p>{post.description}</p>
                 <p>{post.date}</p>
-              </div>
+              </article>
             );
           })}
       </main>
