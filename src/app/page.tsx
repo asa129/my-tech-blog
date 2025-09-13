@@ -16,7 +16,13 @@ export default async function Home() {
   // QiitaApi 取得
   const res = await fetch("http://localhost:3000/api/qiita");
   const qiita_data = await res.json();
-  console.log(qiita_data);
+
+  const ogp_res = await fetch("http://localhost:3000/api/ogp", {
+    cache: "no-cache",
+    method: "POST",
+    body: JSON.stringify({ data: qiita_data }),
+  });
+  const ogp = await ogp_res.json();
 
   // Qiitaデータを表示用に変換
   const all_data: all_data[] = [];
@@ -25,7 +31,7 @@ export default async function Home() {
       title: qiita.title,
       key: qiita.id,
       url: qiita.url,
-      image_url: "",
+      image_url: ogp.find((data: any) => data.id === qiita.id).ogpImage,
       description: qiita.body.substring(0, 100).concat("．．．"),
       updated_at: qiita.updated_at,
     });
